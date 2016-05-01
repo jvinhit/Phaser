@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Flapbird game with phaser</title>
+    <script type="text/javascript" src="js/lib/phaser.min.js"></script>
+    <script type="text/javascript" src="js/Boot.js"></script>
+    <script type="text/javascript" src="js/Preload.js"></script>
+    <script type="text/javascript" src="js/Menu.js"></script>
+    <script type="text/javascript" src="js/Bird.js"></script>
+    <script type="text/javascript" src="js/Ground.js"></script>
+    <script type="text/javascript" src="js/Pipe.js"></script>
+    <script type="text/javascript" src="js/PipeGroup.js"></script>
+    <script type="text/javascript" src="js/Scoreboard.js"></script>
+    <script type="text/javascript" src="js/Play.js"></script>
+
+</head>
+<body>
+    <div id="game"></div>
+    <script type="text/javascript">
+        (function () {
+            var width = 288;
+            var height = 505;
+            var game = new Phaser.Game(width, height, Phaser.AUTO, 'game');
+            game.state.add('Boot', Game.Boot);
+            game.state.add('Preload', Game.Preload);
+            game.state.add('Menu', Game.Menu);
+            game.state.add('Play', Game.Play);
+
+            game.state.start('Boot');
+        })();
+    </script>
+</body>
+</html>
