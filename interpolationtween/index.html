@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>interpolation tween</title>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/phaser/2.1.0/phaser.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+<script type="text/javascript">
+	// Phaser current version test environment
+	// Bezier interpolation
+
+	var game = new Phaser.Game(600, 400, Phaser.AUTO, 'test');
+
+	var BasicGame = function(game) {};
+
+	BasicGame.Boot = function (game) {};
+
+	BasicGame.Boot.prototype = 
+	{
+	    preload: function() {
+	         game.time.advancedTiming = true;
+	    },
+		create: function() {
+	        var square = this.game.add.graphics();
+	        var p0 = new Phaser.Point(0, 0);
+	        var p1 = new Phaser.Point(0, 300);
+	        var p2 = new Phaser.Point(600, 300);
+	        var p3 = new Phaser.Point(600, 0);
+	        
+	        square.beginFill(0xffffff);
+	        square.drawCircle(0, 0, 20);
+	        square.position.set(0, 0);
+	        var tween = this.game.add.tween(square).to({
+	            y: [p0.y, p1.y, p2.y, p3.y],
+	            x: [p0.x, p1.x, p2.x, p3.x]
+	        }, 2000).interpolation(function(v, k){
+	            return Phaser.Math.bezierInterpolation(v, k);
+	        });
+	        tween.start();
+	    },
+	    update: function() {
+	       
+	    },
+	    render: function() {
+	        game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");   
+	    }
+	};
+
+	game.state.add('Boot', BasicGame.Boot);
+	game.state.start('Boot');
+</script>
+</body>
+</html>
